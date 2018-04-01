@@ -1,43 +1,10 @@
 import React from "react"
 import ReactDom from "react-dom"
-import getMuiTheme from "material-ui/styles/getMuiTheme"
-import RaisedButton from "material-ui/RaisedButton"
-import PropTypes from "prop-types"
-
 import injectTapEventPlugin from "react-tap-event-plugin"
+import RenderRouter from "./routes"
+
+import App from "./components/App"
+
 injectTapEventPlugin()
 
-
-class App extends React.Component {
-    getChildContext() {
-        return { muiTheme: getMuiTheme() }
-    }
-
-    getStyles() {
-        const styles = {
-            root: {
-                paddingTop: '50px',
-                minHeight: '400px'
-            }
-        }
-        return styles
-    }
-
-    render() {
-        const styles = this.getStyles()
-        return (
-            <div style={styles.root}>
-                <RaisedButton 
-                    label="Redux博客"
-                    primary={true}
-                />
-            </div>
-        )
-    }
-}
-
-App.childContextTypes={
-    muiTheme:PropTypes.object.isRequired
-}
-
-ReactDom.render(<App />, document.getElementById('root'))
+ReactDom.render(<RenderRouter/>, document.getElementById('root'))
