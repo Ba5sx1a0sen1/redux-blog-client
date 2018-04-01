@@ -1,5 +1,6 @@
 import React from "react"
 import Radium from "radium"
+import {Link} from "react-router"
 import ActionHome from "material-ui/svg-icons/action/home"
 
 class Header extends React.Component{
@@ -39,10 +40,10 @@ class Header extends React.Component{
         return(
             <header style={styles.header}>
                 <div>
-                    <a href="/" style={styles.nav} key='1'><ActionHome color="#fff"/></a>
+                    <Link to="/" style={styles.nav} key='1'><ActionHome color="#fff"/></Link>
                 </div>
                 <div>
-                    <a href="/login" style={styles.nav} key="2">登录</a>
+                    <Link to="/login" style={styles.nav} key="2">登录</Link>
                 </div>
             </header>
         )

@@ -1,7 +1,7 @@
 import React from "react"
 import getMuiTheme from "material-ui/styles/getMuiTheme"
 import PropTypes from "prop-types"
-import Radium,{StyleRoot} from "radium"
+import Radium, { StyleRoot } from "radium"
 import Header from "./shared/Header"
 
 class App extends React.Component {
@@ -24,16 +24,16 @@ class App extends React.Component {
         return (
             <StyleRoot>{/*用来支持组件内联样式的媒体查询功能更*/}
                 <div style={styles.root}>
-                    <Header/>
+                    <Header />
                     {this.props.children}
-                </div>  
+                </div>
             </StyleRoot>
         )
     }
 }
 
-App.childContextTypes={
-    muiTheme:PropTypes.object.isRequired
+App.childContextTypes = {
+    muiTheme: PropTypes.object.isRequired
 }
 
 export default Radium(App)

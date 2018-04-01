@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module:{
     rules: [
@@ -32,6 +32,8 @@ module.exports = {
   }),new ExtractTextPlugin("style.css")],
   mode:'development',
   devServer:{
-      contentBase:'./dist'
+      contentBase:'./dist',
+      historyApiFallback:true, //React-Router的关键点
+      // publicPath:'/dist/'    坑点，会导致页面刷新
   }
 };
