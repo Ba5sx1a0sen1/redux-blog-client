@@ -5,6 +5,12 @@ import App from "./components/App"
 import Login from "./components/auth/Login"
 import { store } from "./redux/store"
 
+import {setCurrentUser} from "./redux/actions/authAction" 
+if(sessionStorage.jwtToken){
+    const user = JSON.parse(sessionStorage.user)
+    store.dispatch(setCurrentUser(user))
+}
+
 export default class RenderRouter extends React.Component {
     render() {
         return (

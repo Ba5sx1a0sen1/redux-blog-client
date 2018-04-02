@@ -3,11 +3,16 @@ import Radium from "radium"
 import {Link} from "react-router"
 import ActionHome from "material-ui/svg-icons/action/home"
 import {connect} from "react-redux"
-
+import {logout} from "../../redux/actions/authAction"
+ 
 class Header extends React.Component{
     constructor(props){
         super(props)
         this.state={}
+    }
+    logout=(e)=>{
+        e.preventDefault()
+        this.props.logout()
     }
     render(){
         const {isAuthenticated,currentUser} = this.props.auth
@@ -39,11 +44,12 @@ class Header extends React.Component{
                 }
             }
         }
-
+        
+        
         const LogoutLink = (
             <div>
                 <span style={{color:'rgb(255,226,0)',padding:'15px'}}>{currentUser.name}</span>
-                <Link to='/' style={styles.nav}>退出</Link>
+                <Link to='/' style={styles.nav} onClick={this.logout}>退出</Link>
             </div>
         )
 
@@ -52,6 +58,8 @@ class Header extends React.Component{
                 <Link to='/login' style={styles.nav}>登录</Link>
             </div>
         )
+
+        
 
         return(
             <header style={styles.header}>
@@ -76,4 +84,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(Radium(Header))
+export default connect(mapStateToProps,{ logout })(Radium(Header))
