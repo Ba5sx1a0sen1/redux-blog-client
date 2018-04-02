@@ -1,4 +1,6 @@
 import axios from "axios"
+import {browserHistory} from "react-router"
+import {Settings} from "../../settings"
 
 export function setCurrentUser(user){
     return {
@@ -17,15 +19,16 @@ function handleError(error){
 
 export function login(data){
     return dispatch=>{
-        axios.post('http://localhost:3000/auth/login',data)
+        axios.post(`${Settings.host}/auth/login`,data)
             .then(response=>{
                 const {token,user} = response.data
                 sessionStorage.setItem('jwtToken',token)
                 sessionStorage.setItem('user',JSON.stringify(user))
                 dispatch(setCurrentUser(user))
+                browserHistory.push('/')
                 console.log('登录成功了')
             })
-            .catch(err=>{
+            .catch(error=>{
                 handleError(error)
             })
     }
