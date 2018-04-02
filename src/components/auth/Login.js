@@ -2,6 +2,7 @@ import React from "react"
 import TextField from "material-ui/TextField"
 import RaisedButton from "material-ui/RaisedButton"
 import Radium from "radium"
+import axios from "axios"
 
 class Login extends React.Component{
     constructor(props){
@@ -53,10 +54,13 @@ class Login extends React.Component{
         e.preventDefault()
         let username = this.refs.username.getValue()
         let password = this.refs.password.getValue()
-        console.log({
-            username,
-            password
-        })
+        axios.post('http://localhost:3000/auth/login',{username,password})//axios将数据对象自动转为json
+            .then((response)=>{
+                console.log(response.data)
+            })
+            .catch((error)=>{
+                console.log(error.response.data)
+            })
     }
 
     render(){
