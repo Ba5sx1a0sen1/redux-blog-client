@@ -2,6 +2,7 @@ import React from "react"
 import Radium from "radium"
 import {Link} from "react-router"
 import ActionHome from "material-ui/svg-icons/action/home"
+import {connect} from "react-redux"
 
 class Header extends React.Component{
     constructor(props){
@@ -9,6 +10,7 @@ class Header extends React.Component{
         this.state={}
     }
     render(){
+        const {isAuthenticated,currentUser} = this.props.auth
         const styles = {
             header:{
                 position:'fixed',
@@ -37,17 +39,41 @@ class Header extends React.Component{
                 }
             }
         }
+
+        const LogoutLink = (
+            <div>
+                <span style={{color:'rgb(255,226,0)',padding:'15px'}}>{currentUser.name}</span>
+                <Link to='/' style={styles.nav}>退出</Link>
+            </div>
+        )
+
+        const LoginLink = (
+            <div>
+                <Link to='/login' style={styles.nav}>登录</Link>
+            </div>
+        )
+
         return(
             <header style={styles.header}>
                 <div>
                     <Link to="/" style={styles.nav} key='1'><ActionHome color="#fff"/></Link>
                 </div>
                 <div>
-                    <Link to="/login" style={styles.nav} key="2">登录</Link>
+                    {
+                        isAuthenticated
+                        ?LogoutLink
+                        :LoginLink
+                    }
                 </div>
             </header>
         )
     }
 }
 
-export default Radium(Header)
+function mapStateToProps(state){
+    return {
+        auth:state.auth//只取store中state中的auth
+    }
+}
+
+export default connect(mapStateToProps)(Radium(Header))

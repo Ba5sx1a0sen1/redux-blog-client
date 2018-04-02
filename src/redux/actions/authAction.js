@@ -23,7 +23,7 @@ export function login(data){
             .then(response=>{
                 const {token,user} = response.data
                 sessionStorage.setItem('jwtToken',token)
-                sessionStorage.setItem('user',JSON.stringify(user))
+                sessionStorage.setItem('currentUser',JSON.stringify(user))
                 dispatch(setCurrentUser(user))
                 browserHistory.push('/')
                 console.log('登录成功了')
