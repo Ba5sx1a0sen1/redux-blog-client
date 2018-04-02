@@ -15,7 +15,8 @@ module.exports = {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env','@babel/react']
+              presets: ['@babel/preset-env','@babel/react'],
+              plugins: ["transform-class-properties"]//启用class properties语法，要结合此插件
             },
           }
         },{

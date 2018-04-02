@@ -1,5 +1,5 @@
 import React from "react"
-import { Router, Route, browserHistory } from "react-router"
+import { Router, Route, browserHistory,hashHistory } from "react-router"
 import App from "./components/App"
 import Login from "./components/auth/Login"
 
