@@ -11,7 +11,7 @@ export function setCurrentUser(user){
 
 function handleError(error){
     if(error.response){
-        console.log(error.response.data.error)
+        console.log(error.response.data.error) 
     }else{
         console.log(error)
     }

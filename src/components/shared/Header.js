@@ -41,7 +41,8 @@ class Header extends React.Component{
                 ':hover':{
                     cursor:'pointer',
                     textDecoration:'underline'
-                }
+                },
+                paddingLeft:'20px'
             }
         }
         
@@ -56,6 +57,7 @@ class Header extends React.Component{
         const LoginLink = (
             <div>
                 <Link to='/login' style={styles.nav}>登录</Link>
+                <Link to="/signup" style={styles.nav}>注册</Link>
             </div>
         )
 
