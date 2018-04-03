@@ -34,6 +34,23 @@ export function login(data){
     }
 }
 
+export function signup(data){
+    return dispatch=>{
+        axios.post(`${Settings.host}/auth/signup`,data)
+            .then(response=>{
+                const {token,user} = response.data
+                sessionStorage.setItem('jwtToken',token)
+                sessionStorage.setItem('user',JSON.stringify(user))
+                dispatch(setCurrentUser(user))
+                browserHistory.push('/')
+                console.log('注册成功了')
+            })
+            .catch(error=>{
+                handleError(error)
+            })
+    }
+}
+
 export function logout(){
     return dispatch=>{
         sessionStorage.removeItem('jwtToken')

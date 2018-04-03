@@ -2,6 +2,8 @@ import React from "react"
 import TextField from "material-ui/TextField"
 import RaisedButton from "material-ui/RaisedButton"
 import Radium from "radium"
+import {connect} from "react-redux"
+import {signup} from "../../redux/actions/authAction"
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -49,14 +51,40 @@ class SignUp extends React.Component {
         }
     }
 
+    handleSubmit=(e)=>{
+        e.preventDefault()
+        let username = this.refs.username.getValue()
+        let password = this.refs.password.getValue()
+        let confirmPassword = this.refs.confirmPassword.getValue()
+        if(password !== confirmPassword){
+            console.log('密码不匹配')
+            return false
+        }
+        this.props.signup({
+            username,
+            password
+        })
+    }
+
     render() {
         let styles = this.getStyles()
         return (
             <div style={styles.root}>
-                <form>
-                    <TextField style={styles.textField} floatingLabelText="用户名" />
-                    <TextField style={styles.textField} type="password" floatingLabelText="密码" />
-                    <TextField style={styles.textField} type="password" floatingLabelText="确认密码" />
+                <form onSubmit={this.handleSubmit}>
+                    <TextField
+                        ref="username"
+                        style={styles.textField}
+                        floatingLabelText="用户名" />
+                    <TextField 
+                        ref="password"
+                        style={styles.textField} 
+                        type="password" 
+                        floatingLabelText="密码" />
+                    <TextField 
+                        ref="confirmPassword"
+                        style={styles.textField} 
+                        type="password" 
+                        floatingLabelText="确认密码" />
                     <RaisedButton
                         primary={true}
                         style={styles.button}
@@ -69,4 +97,4 @@ class SignUp extends React.Component {
     }
 }
 
-export default Radium(SignUp)
+export default connect(null,{signup})(Radium(SignUp))
