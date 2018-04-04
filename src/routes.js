@@ -5,6 +5,7 @@ import App from "./components/App"
 import Login from "./components/auth/Login"
 import SignUp from "./components/auth/SignUp"
 import DashBoard from "./components/DashBoard"
+import NewPost from './components/posts/NewPost';
 
 import { store } from "./redux/store"
 
@@ -33,7 +34,8 @@ export default class RenderRouter extends React.Component {
                     <Route path="/" component={App}>
                         <Route path="/login" component={Login} />
                         <Route path="/signup" component={SignUp}/>
-                        <Route path="/dashboard" component={DashBoard} onEnter={requireAuth}/>                        
+                        <Route path="/dashboard" component={DashBoard} onEnter={requireAuth}/>  
+                        <Route path="/posts/new" component={NewPost} onEnter={requireAuth}/>                                                                      
                     </Route>
                 </Router>
             </Provider>
