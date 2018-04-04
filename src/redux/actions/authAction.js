@@ -25,7 +25,7 @@ export function login(data){
                 sessionStorage.setItem('jwtToken',token)
                 sessionStorage.setItem('user',JSON.stringify(user))
                 dispatch(setCurrentUser(user))
-                browserHistory.push('/')
+                user.admin?browserHistory.push('/dashboard'):browserHistory.push('/')//判断用户的类型,是否是管理员
                 console.log('登录成功了')
             })
             .catch(error=>{
@@ -42,7 +42,7 @@ export function signup(data){
                 sessionStorage.setItem('jwtToken',token)
                 sessionStorage.setItem('user',JSON.stringify(user))
                 dispatch(setCurrentUser(user))
-                browserHistory.push('/')
+                browserHistory.push('/')                
                 console.log('注册成功了')
             })
             .catch(error=>{
