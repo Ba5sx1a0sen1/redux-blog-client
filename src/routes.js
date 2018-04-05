@@ -7,6 +7,7 @@ import SignUp from "./components/auth/SignUp"
 import DashBoard from "./components/DashBoard"
 import NewPost from './components/posts/NewPost';
 import Home from "./components/Home"
+import ShowPost from "./components/posts/ShowPost"
 
 import { store } from "./redux/store"
 
@@ -37,7 +38,8 @@ export default class RenderRouter extends React.Component {
                         <Route path="/login" component={Login} />
                         <Route path="/signup" component={SignUp}/>
                         <Route path="/dashboard" component={DashBoard} onEnter={requireAuth}/>  
-                        <Route path="/posts/new" component={NewPost} onEnter={requireAuth}/>                                                                      
+                        <Route path="/posts/new" component={NewPost} onEnter={requireAuth}/>    
+                        <Route path='/posts/:post_id' component={ShowPost} />                                                                  
                     </Route>
                 </Router>
             </Provider>

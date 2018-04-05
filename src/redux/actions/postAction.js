@@ -40,3 +40,16 @@ export function fetchPosts(){
             })
     }
 }
+
+export function getPost(id){
+    return (dispatch)=>{
+        axios.get(`${Settings.host}/posts/${id}`)
+            .then(response=>{
+                console.log(response.data.post)
+                dispatch({type:'LOAD_POST',post:response.data.post})
+            })
+            .catch(error=>{
+                handleError(error)
+            })
+    }
+}

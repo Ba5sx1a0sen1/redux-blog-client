@@ -3,6 +3,8 @@ import Radium from "radium"
 import { Settings } from "../../settings"
 import {connect} from "react-redux"
 import PostActionList from "./PostActionList"
+import {Link} from "react-router"
+
 class PostItem extends React.Component {
     getStyles() {
         return {
@@ -47,9 +49,9 @@ class PostItem extends React.Component {
                     }
                 </div>
                 <div style={styles.content}>
-                    <div style={styles.name}>
+                    <Link to={`/posts/${this.props.post._id}`} style={styles.name}>
                         {this.props.post.name}
-                    </div>
+                    </Link>
                 </div>
                 {
                     this.props.isAuthenticated && (this.props.user.admin === true)
