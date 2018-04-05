@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import {connect} from "react-redux"
 import PostItem from "./posts/PostItem"
+import {fetchPosts} from "../redux/actions/postAction"
 
 
 class DashBoard extends React.Component {
@@ -10,7 +11,11 @@ class DashBoard extends React.Component {
         super()
         this.state = {}
     }
-
+    componentWillMount(){
+        if(this.props.posts.length===0){
+            this.props.fetchPosts()
+        }
+    }
     getStyles() {
         return {
             root: {
@@ -31,8 +36,6 @@ class DashBoard extends React.Component {
             return <PostItem key={i} post={post} />
         })
         const styles = this.getStyles()
-        console.log(PostList)
-        console.log(this.props)
         return (
             <div style={styles.root}>
                 <div style={styles.actions}>
@@ -53,4 +56,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(DashBoard)
+export default connect(mapStateToProps,{fetchPosts})(DashBoard)

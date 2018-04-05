@@ -23,3 +23,15 @@ export function newPost(data){
         })
     }
 }
+
+export function fetchPosts(){
+    return (dispatch)=>{
+        axios.get(`${Settings.host}/posts`)
+            .then(response=>{
+                console.log(response.data.posts)
+                dispatch({type:'LOAD_POSTS',posts:response.data.posts})
+            }).catch(err=>{
+                handleError(err)
+            })
+    }
+}
