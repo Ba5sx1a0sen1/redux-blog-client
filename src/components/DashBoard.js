@@ -1,6 +1,9 @@
 import React from "react"
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import {connect} from "react-redux"
+import PostItem from "./posts/PostItem"
+
 
 class DashBoard extends React.Component {
     constructor() {
@@ -24,7 +27,12 @@ class DashBoard extends React.Component {
     }
 
     render() {
+        const PostList = this.props.posts.map((post,i)=>{
+            return <PostItem key={i} post={post} />
+        })
         const styles = this.getStyles()
+        console.log(PostList)
+        console.log(this.props)
         return (
             <div style={styles.root}>
                 <div style={styles.actions}>
@@ -33,9 +41,16 @@ class DashBoard extends React.Component {
                         <RaisedButton label='添加新文章' primary={true} />
                     </Link>
                 </div>
+                { PostList }
             </div>
         )
     }
 }
 
-export default DashBoard
+function mapStateToProps(state){
+    return {
+        posts:state.posts
+    }
+}
+
+export default connect(mapStateToProps)(DashBoard)

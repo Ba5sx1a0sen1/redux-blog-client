@@ -17,7 +17,7 @@ export function newPost(data){
         }).then(response=>{
             dispatch({type:'ADD_POST',post:response.data.post})
             browserHistory.push('/dashboard')
-            console.log(response.data.message)
+            console.log(response.data)
         }).catch(err=>{
             handleError(err)
         })

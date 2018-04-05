@@ -1,11 +1,12 @@
 import React from "react"
-import { Router, Route, browserHistory, hashHistory } from "react-router"
+import { Router, Route, browserHistory, hashHistory,IndexRoute } from "react-router"
 import { Provider } from "react-redux"
 import App from "./components/App"
 import Login from "./components/auth/Login"
 import SignUp from "./components/auth/SignUp"
 import DashBoard from "./components/DashBoard"
 import NewPost from './components/posts/NewPost';
+import Home from "./components/Home"
 
 import { store } from "./redux/store"
 
@@ -32,6 +33,7 @@ export default class RenderRouter extends React.Component {
             <Provider store={store}>
                 <Router history={browserHistory}>
                     <Route path="/" component={App}>
+                        <IndexRoute component={Home}/>
                         <Route path="/login" component={Login} />
                         <Route path="/signup" component={SignUp}/>
                         <Route path="/dashboard" component={DashBoard} onEnter={requireAuth}/>  
