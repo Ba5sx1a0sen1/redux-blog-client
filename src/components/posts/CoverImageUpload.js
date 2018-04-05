@@ -63,6 +63,8 @@ class CoverImageUpload extends React.Component {
             reader.onload = (event) => {
                 this.setState({
                     image: event.target.result
+                },()=>{
+                    this.props.handleImage(file)//调用父组件传入的方法
                 })
             }
             reader.readAsDataURL(file)

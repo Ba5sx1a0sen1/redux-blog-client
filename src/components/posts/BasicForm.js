@@ -7,8 +7,18 @@ class BasicForm extends Component {
     getBasicFormInputValue(){
         const name = this.refs.name.getValue()
         const content = this.refs.content.getValue()
-        return {name,content}
+        const file = this.state.file
+
+        console.log({name,content,file})
+        return {name,content,file}
     }
+
+    getImage=(file)=>{//拿到子组件的file
+        this.setState({
+            file:file
+        })
+    }
+
     render() {
         let styles = {
             root: {
@@ -30,7 +40,7 @@ class BasicForm extends Component {
                 <div style={{ marginTop: '15px', marginBottom: '15px' }}>
                     <TextField ref='content' floatingLabelText="内容" multiLine={true} rows={3} style={styles.textField} />
                 </div>
-                <CoverImageUpload tip="上传图片"/>
+                <CoverImageUpload handleImage={this.getImage} tip="上传图片"/>
             </div>
         );
     }
