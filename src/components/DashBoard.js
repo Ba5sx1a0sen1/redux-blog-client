@@ -39,7 +39,6 @@ class DashBoard extends React.Component {
         return (
             <div style={styles.root}>
                 <div style={styles.actions}>
-                    管理员控制面板页面
                     <Link to='/posts/new'>
                         <RaisedButton label='添加新文章' primary={true} />
                     </Link>

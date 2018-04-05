@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
+import CoverImageUpload from "./CoverImageUpload"
 
 class BasicForm extends Component {
 
@@ -29,6 +30,7 @@ class BasicForm extends Component {
                 <div style={{ marginTop: '15px', marginBottom: '15px' }}>
                     <TextField ref='content' floatingLabelText="内容" multiLine={true} rows={3} style={styles.textField} />
                 </div>
+                <CoverImageUpload tip="上传图片"/>
             </div>
         );
     }
