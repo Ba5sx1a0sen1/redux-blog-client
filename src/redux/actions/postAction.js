@@ -1,78 +1,91 @@
 import axios from "axios"
-import {browserHistory} from "react-router"
-import {Settings} from "../../settings"
+import { browserHistory } from "react-router"
+import { Settings } from "../../settings"
 
-function handleError(error){
-    if(error.response){
-        console.log(error.response.data.error) 
-    }else{
+function handleError(error) {
+    if (error.response) {
+        console.log(error.response.data.error)
+    } else {
         console.log(error)
     }
 }
 
-export function newPost(data){
+export function newPost(data) {
     let formData = new FormData()
-    formData.append('name',data.name)
-    formData.append('content',data.content)
-    formData.append('post',data.file)
+    formData.append('name', data.name)
+    formData.append('content', data.content)
+    formData.append('post', data.file)
 
-    return function(dispatch){
-        axios.post(`${Settings.host}/posts`,formData,{
-            headers:{'Authorization':sessionStorage.getItem('jwtToken')}
-        }).then(response=>{
-            dispatch({type:'ADD_POST',post:response.data.post})
+    return function (dispatch) {
+        axios.post(`${Settings.host}/posts`, formData, {
+            headers: { 'Authorization': sessionStorage.getItem('jwtToken') }
+        }).then(response => {
+            dispatch({ type: 'ADD_POST', post: response.data.post })
             browserHistory.push('/dashboard')
             console.log(response.data)
-        }).catch(err=>{
+        }).catch(err => {
             handleError(err)
         })
     }
 }
 
-export function fetchPosts(){
-    return (dispatch)=>{
+export function fetchPosts() {
+    return (dispatch) => {
         axios.get(`${Settings.host}/posts`)
-            .then(response=>{
+            .then(response => {
                 console.log(response.data.posts)
-                dispatch({type:'LOAD_POSTS',posts:response.data.posts})
-            }).catch(err=>{
+                dispatch({ type: 'LOAD_POSTS', posts: response.data.posts })
+            }).catch(err => {
                 handleError(err)
             })
     }
 }
 
-export function getPost(id){
-    return (dispatch)=>{
+export function getPost(id) {
+    return (dispatch) => {
         axios.get(`${Settings.host}/posts/${id}`)
-            .then(response=>{
+            .then(response => {
                 console.log(response.data.post)
-                dispatch({type:'LOAD_POST',post:response.data.post})
+                dispatch({ type: 'LOAD_POST', post: response.data.post })
             })
-            .catch(error=>{
+            .catch(error => {
                 handleError(error)
             })
     }
 }
 
-export function clearPost(){
-    return {type:'CLEAR_POST'}
+export function clearPost() {
+    return { type: 'CLEAR_POST' }
 }
 
-export function editPost(data,id){
+export function editPost(data, id) {
     let formData = new FormData()
-    formData.append('name',data.name)
-    formData.append('content',data.content)
-    formData.append('post',data.file)
+    formData.append('name', data.name)
+    formData.append('content', data.content)
+    formData.append('post', data.file)
 
-    return function(dispatch){
-        axios.put(`${Settings.host}/posts/${id}`,formData,{
-            headers:{'Authorization':sessionStorage.getItem('jwtToken')}
-        }).then(response=>{
-            dispatch({type:'EDIT_POST',post:response.data.post})
+    return function (dispatch) {
+        axios.put(`${Settings.host}/posts/${id}`, formData, {
+            headers: { 'Authorization': sessionStorage.getItem('jwtToken') }
+        }).then(response => {
+            dispatch({ type: 'EDIT_POST', post: response.data.post })
             browserHistory.push('/dashboard')
             console.log(response.data)
-        }).catch(err=>{
+        }).catch(err => {
             handleError(err)
         })
+    }
+}
+
+export function deletePost(id) {
+    return function (dispatch) {
+        axios.delete(`${Settings.host}/posts/${id}`, {
+            headers: { 'Authorization': sessionStorage.getItem('jwtToken') }
+        }).then(response => {
+            dispatch({ type: 'DELETE_POST', id: response.data.id })
+            console.log(response.data.message)
+        }).catch(error => {
+            handleError(error);
+        });
     }
 }
