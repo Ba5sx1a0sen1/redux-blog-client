@@ -53,3 +53,26 @@ export function getPost(id){
             })
     }
 }
+
+export function clearPost(){
+    return {type:'CLEAR_POST'}
+}
+
+export function editPost(data,id){
+    let formData = new FormData()
+    formData.append('name',data.name)
+    formData.append('content',data.content)
+    formData.append('post',data.file)
+
+    return function(dispatch){
+        axios.put(`${Settings.host}/posts/${id}`,formData,{
+            headers:{'Authorization':sessionStorage.getItem('jwtToken')}
+        }).then(response=>{
+            dispatch({type:'EDIT_POST',post:response.data.post})
+            browserHistory.push('/dashboard')
+            console.log(response.data)
+        }).catch(err=>{
+            handleError(err)
+        })
+    }
+}
