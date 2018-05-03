@@ -5,7 +5,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '/dist'),
+    publicPath:'/'    
   },
   module:{
     rules: [
@@ -33,8 +34,12 @@ module.exports = {
   }),new ExtractTextPlugin("style.css")],
   mode:'development',
   devServer:{
-      contentBase:'./dist',
+      // contentBase:'./dist',
       historyApiFallback:true, //React-Router的关键点
+      // historyApiFallback:{
+      //   index:'/dist/index.html'
+      // },
+      //将publicpath移动到上面，这里设置fallbackapi为true，即解决刷新报错问题
       // publicPath:'/dist/'    坑点，会导致页面刷新
   }
 };
